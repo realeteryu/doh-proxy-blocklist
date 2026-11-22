@@ -3,7 +3,7 @@
 // Intra custom URL: https://<worker>.<subdomain>.workers.dev/dns-query
 
 const UPSTREAM = 'https://security.cloudflare-dns.com/dns-query';
-const BLOCKLIST_URL = 'https://raw.githubusercontent.com/realeteryu/dns-blocklists/main/output/blocklist.txt';
+const BLOCKLIST_URL = 'https://cdn.jsdelivr.net/gh/realeteryu/dns-blocklists@main/output/blocklist.txt';
 const BLOCKLIST_TTL = 6 * 60 * 60 * 1000;
 const WIRE = 'application/dns-message';
 const JSON_CT = 'application/dns-json';
