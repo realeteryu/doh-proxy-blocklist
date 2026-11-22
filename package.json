@@ -1,10 +1,5 @@
 {
   "private": true,
-  "name": "doh-blocklist",
-  "version": "1.0.0",
-  "description": "Ultra-light DoH proxy with blocklist filtering on Cloudflare Workers",
-  "main": "index.js",
-  "license": "0BSD",
   "devDependencies": {
     "wrangler": "^4.0.0"
   }
