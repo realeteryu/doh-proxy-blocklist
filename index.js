@@ -15,7 +15,9 @@ async function handle(req, ctx) {
   const url = new URL(req.url);
 
   if (url.pathname === '/' && url.search === '') {
-    return new Response(`status: ok\nblocklist: ${blocklist ? blocklist.size : 0}\n`);
+    let set = null;
+    try { set = await getBlocklist(ctx); } catch {}
+    return new Response(`status: ok\nblocklist: ${set ? set.size : 0}\n`);
   }
   if (url.pathname !== '/dns-query') {
     return new Response('Not Found', { status: 404 });
