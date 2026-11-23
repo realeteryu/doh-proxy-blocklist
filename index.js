@@ -15,16 +15,14 @@ async function handle(req, ctx) {
   const url = new URL(req.url);
 
   if (url.pathname === '/' && url.search === '') {
-    let set = null;
-    try { set = await getBlocklist(ctx); } catch {}
+    const set = await getBlocklist(ctx);
     return new Response(`status: ok\nblocklist: ${set ? set.size : 0}\n`);
   }
   if (url.pathname !== '/dns-query') {
     return new Response('Not Found', { status: 404 });
   }
 
-  let set = null;
-  try { set = await getBlocklist(ctx); } catch {}
+  const set = await getBlocklist(ctx);
 
   // JSON API (GET ?name=example.com&type=A)
   if (req.method === 'GET' && url.searchParams.has('name')) {
