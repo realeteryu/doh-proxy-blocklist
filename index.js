@@ -6,6 +6,7 @@ const JSON_CT = 'application/dns-json';
 
 let blocklist = null;
 let blocklistAt = 0;
+let refreshPromise = null;
 
 export default {
   async fetch(req, _env, ctx) { return handle(req, ctx); },
@@ -109,6 +110,18 @@ async function getBlocklist(ctx) {
 }
 
 async function refresh() {
+  if (refreshPromise) return refreshPromise;
+
+  refreshPromise = loadBlocklist();
+
+  try {
+    return await refreshPromise;
+  } finally {
+    refreshPromise = null;
+  }
+}
+
+async function loadBlocklist() {
   try {
     const res = await fetch(BLOCKLIST_URL, { cf: { cacheTtl: 3600 } });
     if (!res.ok) return blocklist;
